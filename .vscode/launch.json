@@ -1,0 +1,24 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "pwa-node",
+            "request": "launch",
+            "name": "Launch Program",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "outputCapture": "std",
+            "program": "${workspaceFolder}\\index.js",
+            "env":{
+                 "GITHUB_WORKSPACE":"d:\\Github\\resharper-code-analysis-action",
+				 "INPUT_BUILDCONFIGURATION":"Debug",
+                 "INPUT_RESHARPERCLIURL":"https://download-cdn.jetbrains.com/resharper/dotUltimate.2021.2.2/JetBrains.ReSharper.CommandLineTools.2021.2.2.zip",
+                 "INPUT_SOLUTION":"d:\\Github\\resharper-code-analysis-action\\test\\sample\\sample.sln"
+                }
+        }
+    ]
+}
