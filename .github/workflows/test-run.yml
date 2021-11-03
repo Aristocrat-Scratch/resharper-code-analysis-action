@@ -1,0 +1,45 @@
+name: test-run
+
+on: [ push, pull_request ]
+
+env:
+  sample: '${{ github.workspace }}/test/sample/sample.sln'
+  config: Release
+  resharperver: '2021.2.2'
+
+jobs:
+  build_and_test:
+    name: Build and Test
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout action
+      uses: actions/checkout@v2.3.4
+
+    #- name: Setup Node.js
+    #  uses: actions/setup-node@v2.4.0
+    #  with:
+    #    node-version: '12.x'
+    #- name: Build
+    #  run: npm install
+    - uses: suisei-cn/actions-download-file@v1
+      id: downloadfile  # Remember to give an ID if you need the output filename
+      name: Download the file
+      with:
+        url: "https://download-cdn.jetbrains.com/resharper/dotUltimate.${{ env.resharperver }}/JetBrains.ReSharper.CommandLineTools.${{ env.resharperver }}.zip"
+        target: ${{ github.workspace }}/tools
+    - name: Setup Resharper
+      run: |
+        Expand-Archive -Force ${{ github.workspace }}/tools/JetBrains.ReSharper.CommandLineTools.${{ env.resharperver }}.zip ${{ github.workspace }}/tools
+    #- uses: engineerd/configurator@v0.0.8
+    #  with:
+    #      name: 'inspectcode.exe'
+    #      url: "https://download-cdn.jetbrains.com/resharper/dotUltimate.${{ env.resharperver }}/JetBrains.ReSharper.CommandLineTools.${{ env.resharperver }}.zip"
+    #      pathInArchive: 'inspectcode.exe'
+    - name: Analyzie
+      run: |
+        ${{ github.workspace }}/tools/inspectcode.exe ${{ env.sample }} "-o=${{ github.workspace }}/results.xml"
+    - name: Testing
+      run: |
+        echo ${{ github.workspace }}/results.xml
+

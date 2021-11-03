@@ -1,0 +1,14 @@
+
+actions-runner/
+
+node_modules/
+
+resharper/
+
+test/sample/.vs/
+
+test/sample/build/
+
+test/sample/sample/sample.vcxproj.user
+
+results.json/

@@ -1,0 +1,27 @@
+name: 'Jetbrains resharper C++ Code Analysis Action'
+description: 'Jetbrains resharper C++ Code Analysis to produce SARIF files for use in github/codeql-action/upload-sarif@v1'
+inputs:
+  solution:
+    description: 'The solution (.sln) file to be inspected.'
+    required: true
+  buildConfiguration:
+    description: 'The build Configuration (Release, Debug, etc.) to use. This is required if using a
+                  multi-configuration CMake generator.'
+    required: false
+  resharpercliurl:
+    description: 'url to the resharpercli'
+    default: "https://download-cdn.jetbrains.com/resharper/dotUltimate.2021.2.2/JetBrains.ReSharper.CommandLineTools.2021.2.2.zip"
+    required: false
+  report:
+    description: Path to an .xml file of a pre-created report
+    required: false
+  additionalArgs:
+    description: 'Optional parameters to pass to every instance of the compiler.'
+    required: false
+outputs:
+  sarif:
+    description: 'The path to the SARIF file that is generated containing all the results.'
+
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
