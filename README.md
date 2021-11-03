@@ -18,8 +18,8 @@ name: resharper C++ Code Analysis
 on: [ push, pull_request ]
 
 env:
-  # Path to the solution directory.
-  build: '${{ github.workspace }}'
+  # Path to the solution.
+  build: '${{ github.workspace }}/sample.sln'
   config: 'Debug'
 
 jobs:
@@ -36,7 +36,7 @@ jobs:
         # Provide a unique ID to access the sarif output path
         id: run-analysis
         with:
-          solution: ${{ env.build }}/sample.sln
+          solution: ${{ env.build }}
           buildConfiguration: ${{ env.config }}
 
       # Upload SARIF file to GitHub Code Scanning Alerts
